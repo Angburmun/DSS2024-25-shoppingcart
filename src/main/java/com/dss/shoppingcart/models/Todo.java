@@ -1,17 +1,13 @@
-package com.dss.shoppingcart.model;
+package com.dss.shoppingcart.models;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-import org.springframework.stereotype.Component;
-
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
 
@@ -19,20 +15,20 @@ import lombok.Data;
 @Entity
 @Data
 public class Todo implements ITodo {
-	
+
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private long id;
-	
+
 	private String summary;
 	private String description;
 	private Boolean done = false;
 	private Date dueDate;
 	public Todo() {}
-	
+
 	@Autowired
 	public Todo(@Qualifier("summary") String summary) { this.summary = summary; }
-	
+
 	@Override
 	public long getId() { return id; }
 
@@ -41,7 +37,7 @@ public class Todo implements ITodo {
 
 	@Override
 	public void setSummary(String summary) { this.summary= summary;	}
-	
+
 	@Autowired
     @Qualifier("description")
 	@Override
@@ -55,20 +51,20 @@ public class Todo implements ITodo {
 		// TODO Auto-generated method stub
 		return done;
 	}
-	
+
 	@Autowired
 	@Override
 	public void setDone(boolean isDone) { this.done= isDone; }
 
 	@Override
 	public Date getDueDate() { return dueDate; }
-	
+
 	@Autowired
 	@Override
 	public void setDueDate(Date dueDate) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	@Override
     public int hashCode() {
        final int prime = 31;
@@ -76,24 +72,25 @@ public class Todo implements ITodo {
        result = prime * result + (int) (id ^ (id >>> 32));
        return result;
     }
-	
+
 	@Override
     public boolean equals(Object obj) {
-       if (this == obj)
-          return true;
-       if (obj == null)
-          return false;
-       if (getClass() != obj.getClass())
-          return false;
+       if (this == obj) {
+		return true;
+	}
+       if ((obj == null) || (getClass() != obj.getClass())) {
+		return false;
+	}
        Todo other = (Todo) obj;
-       if (id != other.id)
-          return false;
+       if (id != other.id) {
+		return false;
+	}
        return true;
     }
-	
+
     @Override
     public String toString() { return "Todo [id=" + id + ", summary=" + summary + ", description="+description+"]"; }
-    
+
 	@Override
 	public ITodo copy() {
 		Todo todo = new Todo(summary);

@@ -1,4 +1,4 @@
-package com.dss.shoppingcart.controller;
+package com.dss.shoppingcart.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

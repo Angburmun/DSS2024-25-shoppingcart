@@ -1,10 +1,10 @@
-package com.dss.shoppingcart.model;
+package com.dss.shoppingcart.models;
 import java.util.Date;
 
 public interface ITodo {
 	long getId();
     String getSummary();
-    void setSummary(String summary);    
+    void setSummary(String summary);
     String getDescription();
     void setDescription(String description);
     boolean isDone();

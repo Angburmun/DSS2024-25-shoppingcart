@@ -1,25 +1,25 @@
 package com.dss.shoppingcart.services;
 
-import com.dss.shoppingcart.model.Product;
-import com.dss.shoppingcart.repository.ProductRepo;
+import com.dss.shoppingcart.models.Product;
+import com.dss.shoppingcart.repositories.ProductRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
 
-    private final ProductRepo productRepo;
-
-    public ProductService(ProductRepo productRepo) { this.productRepo = productRepo; }
+    @Autowired
+    private ProductRepo productRepo;
 
     public List<Product> getAllProducts() {
         return productRepo.findAll();
     }
 
-    public Product getProductById(Long id) {
-        return productRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Product not found with ID: " + id));
+    public Optional<Product> getProductById(Long id) {
+        return productRepo.findById(id);
     }
 
     public Product saveProduct(Product product) {
@@ -27,9 +27,6 @@ public class ProductService {
     }
 
     public void deleteProduct(Long id) {
-        if (!productRepo.existsById(id)) {
-            throw new IllegalArgumentException("Product not found with ID: " + id);
-        }
         productRepo.deleteById(id);
     }
 }
