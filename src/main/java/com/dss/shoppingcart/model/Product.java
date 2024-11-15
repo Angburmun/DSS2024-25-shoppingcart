@@ -11,7 +11,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 public class Product {
 
     @Id
@@ -19,7 +18,9 @@ public class Product {
     private Long id;
     private String name;
     private double price;
-
+    
+    public Product() {}
+    
     public Product(String name, double price) {
         this.name  = name;
         this.price = price;
