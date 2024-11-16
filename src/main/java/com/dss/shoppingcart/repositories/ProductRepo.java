@@ -6,4 +6,7 @@ import com.dss.shoppingcart.models.Product;
 
 public interface ProductRepo extends JpaRepository<Product, Long> {
 	List<Product> findByNameContainingIgnoreCase(String name);
+	List<Product> findByPriceBetween(Double minPrice, Double maxPrice);
+	List<Product> findByPriceLessThanEqual(Double maxPrice);
+	List<Product> findByPriceGreaterThanEqual(Double minPrice);
 }

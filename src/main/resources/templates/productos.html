@@ -6,19 +6,34 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-	<!-- Incluir el header -->
-	<th:block th:replace="~{header :: header}"></th:block>
-	
-	<div th:if="${message}" class="alert alert-success">
-	    <p th:text="${message}"></p>
-	</div>
-	
+    <!-- Incluir el header -->
+    <th:block th:replace="~{header :: header}"></th:block>
+
     <div class="container mt-4">
         <h1 class="text-center mb-4">Lista de Productos</h1>
-		
-        <!-- Botón para añadir un nuevo producto -->
-        <div class="text-end mb-3">
-            <a href="/products/add" class="btn btn-primary">Añadir Producto</a>
+
+        <!-- Formulario de Filtro por Precio -->
+        <form th:action="@{/products/filter}" method="get" class="mb-3">
+            <div class="row">
+                <div class="col-md-5">
+                    <input class="form-control" type="number" name="minPrice" placeholder="Precio mínimo" th:value="${minPrice}" aria-label="Precio mínimo">
+                </div>
+                <div class="col-md-5">
+                    <input class="form-control" type="number" name="maxPrice" placeholder="Precio máximo" th:value="${maxPrice}" aria-label="Precio máximo">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100" type="submit">Filtrar</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Mostrar Rango de Precios Actual -->
+        <div th:if="${minPrice != null and maxPrice != null}" class="alert alert-info">
+            <p>Mostrando productos con precios entre 
+                <span th:text="${minPrice}"></span> y 
+                <span th:text="${maxPrice}"></span>.
+            </p>
+            <a href="/products" class="btn btn-secondary btn-sm">Restablecer filtros</a>
         </div>
 
         <!-- Tabla para listar productos -->
@@ -32,7 +47,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Iteración de productos -->
                 <tr th:each="product : ${products}">
                     <td th:text="${product.id}"></td>
                     <td th:text="${product.name}"></td>
@@ -45,6 +59,11 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Botón para agregar un nuevo producto -->
+        <div class="text-end mt-3">
+            <a href="/products/add" class="btn btn-primary">Agregar Nuevo Producto</a>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->

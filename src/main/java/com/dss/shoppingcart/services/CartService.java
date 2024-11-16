@@ -23,4 +23,6 @@ public class CartService {
                 .findFirst();
         productToRemove.ifPresent(cartProducts::remove);
     }
+
+    public void clearCart() { cartProducts.clear(); }
 }

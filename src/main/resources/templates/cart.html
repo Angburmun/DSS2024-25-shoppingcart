@@ -6,13 +6,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-	<!-- Incluir el header -->
-	<th:block th:replace="~{header :: header}"></th:block>
-	
+    <!-- Incluir el header -->
+    <th:block th:replace="~{header :: header}"></th:block>
+
     <div class="container mt-4">
         <h1 class="text-center mb-4">Carrito de Compras</h1>
+		
+		<!-- Mensaje de error -->
+		<div th:if="${error}" class="alert alert-danger">
+			<p th:text="${error}"></p>
+		</div>
 
-        <!-- Tabla de productos en el carrito -->
+        <!-- Botón para Vaciar el Carrito -->
+        <div class="d-flex justify-content-end mb-3">
+			<a href="/cart/clear" 
+			   class="btn btn-danger" 
+			   onclick="return confirm('¿Estás seguro de que quieres vaciar el carrito?')">
+			    Vaciar Carrito
+			</a>
+        </div>
+
+        <!-- Tabla para listar los productos del carrito -->
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
@@ -27,16 +41,25 @@
                     <td th:text="${product.id}"></td>
                     <td th:text="${product.name}"></td>
                     <td th:text="${product.price}"></td>
-                    <td>
-                        <a th:href="'/cart/remove/' + ${product.id}" class="btn btn-danger btn-sm">Eliminar</a>
-                    </td>
+					<td>
+						<a th:href="'/cart/remove/' + ${product.id}" 
+						   class="btn btn-warning btn-sm" 
+						   th:onclick="'return confirm(\'¿Estás seguro de que quieres eliminar este artículo de tu carrito?\')'">
+						    Eliminar
+						</a>
+					</td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- Botón para seguir comprando -->
+        <!-- Botón para Proceder al Pago -->
         <div class="text-end">
-            <a href="/products" class="btn btn-primary">Seguir Comprando</a>
+			<a href="/products" class="btn btn-primary">Seguir Comprando</a>
+			<a th:href="@{/cart/checkout}" 
+			   class="btn btn-success" 
+			   th:classappend="${#lists.isEmpty(cartProducts)} ? 'disabled' : ''">
+			    Pagar y Generar Factura
+			</a>
         </div>
     </div>
 

@@ -24,4 +24,16 @@ public class ProductService {
     public void deleteProduct(Long id) { productRepo.deleteById(id); }
     
     public List<Product> searchProductsByName(String name) { return productRepo.findByNameContainingIgnoreCase(name); }
+    
+    public List<Product> filterProductsByPrice(Double minPrice, Double maxPrice) {
+        if (minPrice == null && maxPrice == null) {
+            return productRepo.findAll();
+        } else if (minPrice == null) {
+            return productRepo.findByPriceLessThanEqual(maxPrice);
+        } else if (maxPrice == null) {
+            return productRepo.findByPriceGreaterThanEqual(minPrice);
+        } else {
+            return productRepo.findByPriceBetween(minPrice, maxPrice);
+        }
+    }
 }

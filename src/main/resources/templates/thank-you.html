@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Página Principal</title>
+    <title>Gracias por su compra</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -9,13 +9,13 @@
     <!-- Incluir el header -->
     <th:block th:replace="~{header :: header}"></th:block>
 
-    <!-- Contenido principal -->
     <div class="container mt-5 text-center">
-        <h1 class="text-center">Aplicación de Carrito de la Compra</h1>
-		<p class="text-center">Ángel Burgos Muñoz - DSS MUII UGR 2024/25.</p>
-		<hr>
-		<p class="mt-3">Visita la lista de productos para comenzar</p>
-		<a href="/products" class="btn btn-primary">Lista de productos</a>
+        <h1>¡Gracias por su compra!</h1>
+        <p class="mt-3">Su factura se ha generado correctamente. Puede descargarla haciendo clic en el siguiente enlace:</p>
+        <a href="/cart/download-invoice" class="btn btn-primary">Descargar Factura</a>
+        <hr>
+        <p class="mt-3">¿Desea seguir comprando?</p>
+        <a href="/cart/clear" class="btn btn-secondary">Volver a la lista de productos</a>
     </div>
 
     <!-- Bootstrap JS -->

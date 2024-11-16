@@ -60,5 +60,15 @@ public class ProductController {
         model.addAttribute("query", query);
         return "productos";
     }
-
+    
+    @GetMapping("/filter")
+    public String filterProductsByPrice(@RequestParam(value = "minPrice", required = false) Double minPrice,
+    									@RequestParam(value = "maxPrice", required = false) Double maxPrice,
+                                        Model model) {
+        List<Product> products = productService.filterProductsByPrice(minPrice, maxPrice);
+        model.addAttribute("products", products);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        return "productos";
+    }
 }
