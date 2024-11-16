@@ -9,9 +9,13 @@
 	<!-- Incluir el header -->
 	<th:block th:replace="~{header :: header}"></th:block>
 	
+	<div th:if="${message}" class="alert alert-success">
+	    <p th:text="${message}"></p>
+	</div>
+	
     <div class="container mt-4">
         <h1 class="text-center mb-4">Lista de Productos</h1>
-
+		
         <!-- Botón para añadir un nuevo producto -->
         <div class="text-end mb-3">
             <a href="/products/add" class="btn btn-primary">Añadir Producto</a>

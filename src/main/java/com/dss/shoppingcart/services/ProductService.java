@@ -22,4 +22,6 @@ public class ProductService {
     public Product saveProduct(Product product) { return productRepo.save(product); }
 
     public void deleteProduct(Long id) { productRepo.deleteById(id); }
+    
+    public List<Product> searchProductsByName(String name) { return productRepo.findByNameContainingIgnoreCase(name); }
 }
