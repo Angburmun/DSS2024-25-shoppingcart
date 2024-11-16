@@ -1,11 +1,14 @@
 package com.dss.shoppingcart.controllers;
 
-import com.dss.shoppingcart.models.Product;
-import com.dss.shoppingcart.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import com.dss.shoppingcart.models.Product;
+import com.dss.shoppingcart.services.ProductService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/products")
@@ -16,16 +19,18 @@ public class ProductController {
 
     @GetMapping
     public String listProducts(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
-        return "products";
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "productos";
     }
 
-    @GetMapping("/new")
-    public String showCreateForm(Model model) {
+    @GetMapping("/add")
+    public String showAddProductForm(Model model) {
         model.addAttribute("product", new Product());
-        return "product-form";
+        return "formulario-producto";
     }
 
+    // Guardar un nuevo producto
     @PostMapping
     public String saveProduct(@ModelAttribute("product") Product product) {
         productService.saveProduct(product);
@@ -33,9 +38,11 @@ public class ProductController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        model.addAttribute("product", productService.getProductById(id).orElse(null));
-        return "product-form";
+    public String showEditProductForm(@PathVariable Long id, Model model) {
+        Product product = productService.getProductById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado: " + id));
+        model.addAttribute("product", product);
+        return "formulario-producto";
     }
 
     @GetMapping("/delete/{id}")
