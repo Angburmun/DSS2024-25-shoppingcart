@@ -9,6 +9,11 @@
     <div class="container mt-4">
         <h1 class="text-center mb-4">Lista de Productos</h1>
 
+        <!-- Enlace para ver el carrito -->
+        <div class="text-end mb-3">
+            <a href="/cart" class="btn btn-success">Ver Carrito</a>
+        </div>
+
         <!-- Botón para añadir un nuevo producto -->
         <div class="text-end mb-3">
             <a href="/products/add" class="btn btn-primary">Añadir Producto</a>
@@ -33,6 +38,7 @@
                     <td>
                         <a th:href="'/products/edit/' + ${product.id}" class="btn btn-warning btn-sm">Editar</a>
                         <a th:href="'/products/delete/' + ${product.id}" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a th:href="'/cart/add/' + ${product.id}" class="btn btn-success btn-sm">Añadir al Carrito</a>
                     </td>
                 </tr>
             </tbody>
