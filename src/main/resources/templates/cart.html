@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lista de Productos</title>
+    <title>Carrito de Compras</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
     <div class="container mt-4">
-        <h1 class="text-center mb-4">Lista de Productos</h1>
+        <h1 class="text-center mb-4">Carrito de Compras</h1>
 
-        <!-- Botón para añadir un nuevo producto -->
-        <div class="text-end mb-3">
-            <a href="/products/add" class="btn btn-primary">Añadir Producto</a>
-        </div>
-
-        <!-- Tabla para listar productos -->
+        <!-- Tabla de productos en el carrito -->
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
@@ -25,18 +20,21 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Iteración de productos -->
-                <tr th:each="product : ${products}">
+                <tr th:each="product : ${cartProducts}">
                     <td th:text="${product.id}"></td>
                     <td th:text="${product.name}"></td>
                     <td th:text="${product.price}"></td>
                     <td>
-                        <a th:href="'/products/edit/' + ${product.id}" class="btn btn-warning btn-sm">Editar</a>
-                        <a th:href="'/products/delete/' + ${product.id}" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a th:href="'/cart/remove/' + ${product.id}" class="btn btn-danger btn-sm">Eliminar</a>
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- Botón para seguir comprando -->
+        <div class="text-end">
+            <a href="/products" class="btn btn-primary">Seguir Comprando</a>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->
