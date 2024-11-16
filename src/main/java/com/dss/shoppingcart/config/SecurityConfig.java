@@ -6,16 +6,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
-                                .anyRequest().permitAll()
-                );
+        http.authorizeHttpRequests(requests -> requests
+        		.requestMatchers("/", "/login", "/products", "/cart/**", "/thank-you", "/h2-console/**").permitAll()
+                .requestMatchers("/products/add", "/products/edit/**", "/products/delete/**").hasRole("ADMIN")
+                .anyRequest().authenticated())
+        	.formLogin(login -> login
+        			.loginPage("/login")
+        			.defaultSuccessUrl("/products", true)
+        			.permitAll())
+        	.logout(logout -> logout
+        			.logoutUrl("/logout")
+        			.logoutSuccessUrl("/login?logout")
+        			.permitAll());
+
         return http.build();
     }
 }

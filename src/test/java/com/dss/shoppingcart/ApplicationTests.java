@@ -1,4 +1,4 @@
-package com.dss.spring.data.rest;
+package com.dss.shoppingcart;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
