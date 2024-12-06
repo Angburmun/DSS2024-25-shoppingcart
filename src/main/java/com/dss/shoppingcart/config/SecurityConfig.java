@@ -17,10 +17,16 @@ public class SecurityConfig {
 		http
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers(new MvcRequestMatcher(null, "/")).permitAll()
+				.requestMatchers(new MvcRequestMatcher(null, "/products")).permitAll()
+				.requestMatchers(new MvcRequestMatcher(null, "/cart/**")).permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin(Customizer.withDefaults())
-			.httpBasic(Customizer.withDefaults());
+			.httpBasic(Customizer.withDefaults())
+			.logout(logout -> logout
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/")
+			);
 		return http.build();
 	}
 }
