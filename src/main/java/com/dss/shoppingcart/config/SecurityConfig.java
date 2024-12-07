@@ -19,9 +19,9 @@ public class SecurityConfig {
 				.requestMatchers(new MvcRequestMatcher(null, "/")).permitAll()
 				.requestMatchers(new MvcRequestMatcher(null, "/products")).permitAll()
 				.requestMatchers(new MvcRequestMatcher(null, "/cart/**")).permitAll()
+				.requestMatchers(new MvcRequestMatcher(null, "/admin/**")).hasRole("ADMIN")
 				.anyRequest().authenticated()
 			)
-			
 			.formLogin(Customizer.withDefaults())
 			
 			.httpBasic(Customizer.withDefaults())
