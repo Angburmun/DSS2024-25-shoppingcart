@@ -21,8 +21,16 @@ public class SecurityConfig {
 				.requestMatchers(new MvcRequestMatcher(null, "/cart/**")).permitAll()
 				.anyRequest().authenticated()
 			)
+			
+			.anonymous(anonymous -> anonymous
+		            .principal("guest")
+		            .authorities("ROLE_ANONYMOUS")
+			)
+			
 			.formLogin(Customizer.withDefaults())
+			
 			.httpBasic(Customizer.withDefaults())
+			
 			.logout(logout -> logout
 				.logoutUrl("/logout")
 				.logoutSuccessUrl("/")
