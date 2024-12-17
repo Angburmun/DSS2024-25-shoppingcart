@@ -4,4 +4,4 @@
 
 ## Configuración de la aplicación
 <p align="justify"> La aplicación lee una base de datos en <em>D:\DSS</em>. Si no existe, la crea. </p>
-<p align="justify"> El resto de configuraciones se puede ver dentro del archivo. </p>
+<p align="justify"> El resto de configuraciones se pueden ver dentro del archivo. </p>
