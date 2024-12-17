@@ -14,6 +14,8 @@ import java.util.List;
 
 @Service
 public class PdfService {
+	
+	private int counter = 0;
 
     public byte[] generateInvoice(List<Product> products) {
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
@@ -31,7 +33,7 @@ public class PdfService {
             Font regularFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
             String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
             document.add(new Paragraph("Fecha: " + currentDate, regularFont));
-            document.add(new Paragraph("Número de Factura: #" + (int) (Math.random() * 100000), regularFont));
+            document.add(new Paragraph("Número de Factura: #" + (int) (++counter), regularFont));
             document.add(new Paragraph(" ")); // Espacio
 
             // Tabla de Productos
