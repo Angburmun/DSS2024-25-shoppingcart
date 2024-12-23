@@ -17,6 +17,7 @@ public class SecurityConfig {
 		http
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers(new MvcRequestMatcher(null, "/")).permitAll()
+				.requestMatchers(new MvcRequestMatcher(null, "/login")).permitAll()
 				.requestMatchers(new MvcRequestMatcher(null, "/products")).permitAll()
 				.requestMatchers(new MvcRequestMatcher(null, "/cart/**")).permitAll()
 				.requestMatchers(new MvcRequestMatcher(null, "/admin/**")).hasRole("ADMIN")
@@ -30,6 +31,7 @@ public class SecurityConfig {
 				.logoutUrl("/logout")
 				.logoutSuccessUrl("/")
 			);
+		http.csrf().disable();
 		return http.build();
 	}
 }
